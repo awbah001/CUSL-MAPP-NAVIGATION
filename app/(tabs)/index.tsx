@@ -1,31 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { CampusMap } from '@/components/CampusMap';
+import { useCampusDirectory } from '@/hooks/useCampusDirectory';
+import { useUserLocation } from '@/hooks/useUserLocation';
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+export default function MapScreen() {
+  const directory = useCampusDirectory();
+  const location = useUserLocation();
 
-export default function TabOneScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <CampusMap
+      places={directory.places}
+      loading={directory.loading}
+      error={directory.error}
+      onRetry={() => {
+        void directory.reload();
+      }}
+      userLocation={location.coordinates}
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

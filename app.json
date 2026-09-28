@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Practice_expo",
+    "name": "Campus Navigation",
     "slug": "Practice_expo",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,6 +26,12 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow Campus Navigation to show your position and how far each place is."
+        }
+      ],
       [
         "expo-splash-screen",
         {
